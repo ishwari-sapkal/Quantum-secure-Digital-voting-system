@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electronic Voting Machine</title>
+
+<style>
+
+body{
+margin:0;
+font-family:"Segoe UI",sans-serif;
+background:linear-gradient(to bottom,#2c3e50,#4a6fa5);
+}
+
+.evm-container{
+width:900px;
+margin:40px auto;
+background:#f9f9f9;
+border:6px solid #bfbfbf;
+border-radius:14px;
+padding:25px;
+box-shadow:0 15px 35px rgba(0,0,0,0.25);
+}
+
+.header{
+text-align:center;
+margin-bottom:25px;
+}
+
+.header h2{
+margin:0;
+font-size:26px;
+color:#1e3a8a;
+}
+
+.user-info{
+font-size:14px;
+margin-top:6px;
+color:#374151;
+}
+
+.ballot-area{
+display:grid;
+grid-template-columns:1fr 160px;
+border:2px solid #cbd5e1;
+border-radius:8px;
+overflow:hidden;
+}
+
+.logo-column{
+padding:15px;
+background:linear-gradient(to bottom,#fef3c7,#dbeafe);
+}
+
+.logo-row{
+display:flex;
+align-items:center;
+background:#fff;
+border-bottom:1px solid #cbd5e1;
+padding:8px 12px;
+border-radius:6px;
+margin-bottom:8px;
+}
+
+.logo-row img{
+width:80px;
+height:80px;
+object-fit:contain;
+}
+
+.party-info{
+display:flex;
+flex-direction:column;
+margin-left:15px;
+}
+
+.party-name{
+font-size:18px;
+font-weight:700;
+color:#1e3a8a;
+}
+
+.candidate-name{
+font-size:15px;
+color:#374151;
+}
+
+.button-column{
+background:#1e3a8a;
+padding:20px 0;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.button-row{
+height:85px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+margin-bottom:20px;
+}
+
+.light{
+width:16px;
+height:16px;
+background:#7f1d1d;
+border-radius:50%;
+margin-bottom:17px;
+transition:0.3s;
+}
+
+/* when mouse moves over the light */
+.light:hover{
+background:#22c55e;
+box-shadow:0 0 8px #22c55e;
+}
+
+.vote-btn{
+width:100px;
+height:36px;
+border-radius:24px;
+border:none;
+background:#2563eb;
+color:white;
+font-weight:700;
+cursor:pointer;
+}
+
+.vote-btn:hover{
+background:#1d4ed8;
+}
+
+.flash{
+background:#e0f2fe;
+padding:10px;
+border-radius:6px;
+margin-bottom:15px;
+text-align:center;
+}
+
+.footer{
+text-align:center;
+margin-top:20px;
+}
+
+.footer a{
+text-decoration:none;
+margin:0 15px;
+font-size:15px;
+font-weight:600;
+color:#1e3a8a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="evm-container">
+
+<div class="header">
+<h2>ELECTRONIC VOTING MACHINE</h2>
+<div class="user-info">
+Logged in as: <b>{{ session.get('user') }}</b>
+</div>
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+
+<div class="flash">{{ msg }}</div>
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="ballot-area">
+
+<div class="logo-column">
+
+<div class="logo-row">
+<img src="{{ url_for('static', filename='images/bjp.png') }}">
+<div class="party-info">
+<div class="party-name">BJP</div>
+<div class="candidate-name">Narendra Sharma</div>
+</div>
+</div>
+
+<div class="logo-row">
+<img src="{{ url_for('static', filename='images/congress.png') }}">
+<div class="party-info">
+<div class="party-name">Congress</div>
+<div class="candidate-name">Rahul Verma</div>
+</div>
+</div>
+
+<div class="logo-row">
+<img src="{{ url_for('static', filename='images/aap.png') }}">
+<div class="party-info">
+<div class="party-name">AAP</div>
+<div class="candidate-name">Arvind Mishra</div>
+</div>
+</div>
+
+<div class="logo-row">
+<img src="{{ url_for('static', filename='images/shivsena.png') }}">
+<div class="party-info">
+<div class="party-name">Shiv Sena</div>
+<div class="candidate-name">Uday Patil</div>
+</div>
+</div>
+
+<div class="logo-row">
+<img src="{{ url_for('static', filename='images/bsp.png') }}">
+<div class="party-info">
+<div class="party-name">BSP</div>
+<div class="candidate-name">Mayank Gautam</div>
+</div>
+</div>
+
+<div class="logo-row">
+<img src="{{ url_for('static', filename='images/cpi.png') }}">
+<div class="party-info">
+<div class="party-name">CPI</div>
+<div class="candidate-name">Ramesh Kulkarni</div>
+</div>
+</div>
+
+<div class="logo-row">
+<img src="{{ url_for('static', filename='images/ncp.png') }}">
+<div class="party-info">
+<div class="party-name">NCP</div>
+<div class="candidate-name">Ajay Deshmukh</div>
+</div>
+</div>
+
+<div class="logo-row">
+<img src="{{ url_for('static', filename='images/tmc.png') }}">
+<div class="party-info">
+<div class="party-name">TMC</div>
+<div class="candidate-name">Sanjay Roy</div>
+</div>
+</div>
+
+</div>
+
+<div class="button-column">
+
+<form method="POST" onsubmit="return confirmVote()">
+<div class="button-row">
+<div class="light"></div>
+<button class="vote-btn" name="candidate" value="BJP">VOTE</button>
+</div>
+</form>
+
+<form method="POST" onsubmit="return confirmVote()">
+<div class="button-row">
+<div class="light"></div>
+<button class="vote-btn" name="candidate" value="Congress">VOTE</button>
+</div>
+</form>
+
+<form method="POST" onsubmit="return confirmVote()">
+<div class="button-row">
+<div class="light"></div>
+<button class="vote-btn" name="candidate" value="AAP">VOTE</button>
+</div>
+</form>
+
+<form method="POST" onsubmit="return confirmVote()">
+<div class="button-row">
+<div class="light"></div>
+<button class="vote-btn" name="candidate" value="Shiv Sena">VOTE</button>
+</div>
+</form>
+
+<form method="POST" onsubmit="return confirmVote()">
+<div class="button-row">
+<div class="light"></div>
+<button class="vote-btn" name="candidate" value="BSP">VOTE</button>
+</div>
+</form>
+
+<form method="POST" onsubmit="return confirmVote()">
+<div class="button-row">
+<div class="light"></div>
+<button class="vote-btn" name="candidate" value="CPI">VOTE</button>
+</div>
+</form>
+
+<form method="POST" onsubmit="return confirmVote()">
+<div class="button-row">
+<div class="light"></div>
+<button class="vote-btn" name="candidate" value="NCP">VOTE</button>
+</div>
+</form>
+
+<form method="POST" onsubmit="return confirmVote()">
+<div class="button-row">
+<div class="light"></div>
+<button class="vote-btn" name="candidate" value="TMC">VOTE</button>
+</div>
+</form>
+
+</div>
+
+</div>
+
+<div class="footer">
+<a href="{{ url_for('logout') }}">Logout</a>
+</div>
+
+</div>
+
+<script>
+
+function confirmVote(){
+return confirm("Confirm your vote?");
+}
+
+</script>
+
+</body>
+</html>

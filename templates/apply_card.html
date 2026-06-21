@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voter ID Registration</title>
+
+<style>
+body{
+margin:0;
+font-family:"Segoe UI",sans-serif;
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#1e40af);
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.container{
+width:900px;
+background:white;
+padding:40px;
+border-radius:16px;
+box-shadow:0 20px 50px rgba(0,0,0,0.35);
+position:relative;
+}
+
+.container::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:7px;
+background:linear-gradient(90deg,#2563eb,#3b82f6,#60a5fa);
+border-top-left-radius:16px;
+border-top-right-radius:16px;
+}
+
+h2{
+text-align:center;
+color:#1e3a8a;
+margin-bottom:30px;
+}
+
+.section{margin-bottom:25px;}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+label{
+display:block;
+font-weight:600;
+margin-bottom:6px;
+}
+
+input, textarea, select{
+width:100%;
+padding:11px;
+border-radius:8px;
+border:1px solid #cbd5e1;
+}
+
+button{
+margin-top:25px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:30px;
+background:linear-gradient(90deg,#2563eb,#1d4ed8);
+color:white;
+font-weight:700;
+cursor:pointer;
+}
+
+.flash{
+background:#dbeafe;
+padding:10px;
+border-radius:6px;
+margin-bottom:15px;
+text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Voter ID Registration</h2>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<div class="flash">{{ msg }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<form method="POST" action="/apply_card" enctype="multipart/form-data">
+
+<div class="section">
+<div class="grid">
+
+<div>
+<label>Full Name</label>
+<input type="text" name="full_name" required>
+</div>
+
+<div>
+<label>Date of Birth</label>
+<input type="date" name="dob" required>
+</div>
+
+<div>
+<label>Gender</label>
+<select name="gender" required>
+<option value="">Select</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+</div>
+
+<!-- ✅ DISABILITY FIELD -->
+<div>
+<label>Disability</label>
+<select name="disability" required>
+<option value="">Select</option>
+<option value="Yes">Yes</option>
+<option value="No">No</option>
+</select>
+</div>
+
+<div>
+<label>Mobile Number</label>
+<input type="tel" name="mobile" pattern="[0-9]{10}" required>
+</div>
+
+</div>
+</div>
+
+<div class="section">
+<label>Email</label>
+<input type="email" name="email" required>
+</div>
+
+<div class="section">
+<label>Residential Address</label>
+<textarea name="address" rows="3" required></textarea>
+
+<div class="grid" style="margin-top:10px;">
+<div>
+<label>City</label>
+<input type="text" name="city" required>
+</div>
+
+<div>
+<label>Pincode</label>
+<input type="text" name="pincode" pattern="[0-9]{6}" required>
+</div>
+
+<div>
+<label>Ward Number</label>
+<input type="text" name="ward" required>
+</div>
+</div>
+</div>
+
+<div class="section">
+<label>Identity Proof</label>
+<input type="file" name="id_proof" required>
+</div>
+
+<div class="section">
+<div class="grid">
+
+<div>
+<label>Password</label>
+<input type="password" name="password" required>
+</div>
+
+<div>
+<label>Confirm Password</label>
+<input type="password" name="confirm_password" required>
+</div>
+
+</div>
+</div>
+
+<button type="submit">Submit Application</button>
+
+</form>
+</div>
+
+</body>
+</html>

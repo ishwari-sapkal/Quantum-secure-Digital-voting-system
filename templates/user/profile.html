@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Profile</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0d3a66;
+    color: #1a2f55;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+h1 {
+    color: #0d3a66;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 31px;
+    font-weight: 720;
+}
+
+.user-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.user-info div {
+    background: #f0f4fa;
+    padding: 15px 20px;
+    border-left: 4px solid #0d3a66;
+    border-radius: 8px;
+}
+
+.user-info div b {
+    display: block;
+    margin-bottom: 5px;
+    color: #0d3a66;
+    font-weight: 600;
+}
+
+.button-row {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.button-row button, .button-row a button {
+    padding: 12px 25px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 25px;
+    background: #0d3a66;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button-row button:hover, .button-row a button:hover {
+    background: #0055aa;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 60px;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background: #fff;
+    color: #000;
+    margin: auto;
+    padding: 0;
+    border-radius: 12px;
+    width: 450px;
+    max-width: 95%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    font-size: 14px;
+    border: 2px solid #0d3a66;
+}
+
+.modal-header {
+    background: #0d3a66;
+    color: #ffd700;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-header img {
+    width: 40px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+/* CARD LAYOUT */
+.card-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+    align-items: center;
+}
+
+.stamp-box {
+    text-align: center;
+}
+
+.stamp-box img {
+    width: 180px;
+    opacity: 0.85;
+    transform: rotate(-10deg);
+}
+
+.modal-body p {
+    margin: 10px 0;
+}
+
+.modal-body b {
+    color: #0d3a66;
+}
+
+.close-btn, .print-btn {
+    padding: 10px 20px;
+    margin: 15px 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: #ccc;
+}
+
+.print-btn {
+    background: #0d3a66;
+    color: white;
+}
+
+/* ✅ PRINT FIX */
+@media print {
+
+    /* Hide everything */
+    body * {
+        visibility: hidden;
+    }
+
+    /* Show only voter card */
+    #voterModal, #voterModal * {
+        visibility: visible;
+    }
+
+    #voterModal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+    }
+
+    .modal-content {
+        box-shadow: none;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    /* Hide buttons */
+    .close-btn,
+    .print-btn {
+        display: none !important;
+    }
+    @media print {
+
+    /* Hide everything */
+    body * {
+        visibility: hidden;
+    }
+
+    /* Show only modal */
+    #voterModal, #voterModal * {
+        visibility: visible;
+    }
+
+    /* Keep exact center layout */
+    #voterModal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* ❗ KEEP ORIGINAL SIZE (IMPORTANT) */
+    .modal-content {
+        width: 450px;          /* SAME as your design */
+        max-width: 450px;
+        box-shadow: none;
+        border-radius: 12px;
+    }
+
+    /* Hide buttons */
+    .close-btn,
+    .print-btn {
+        display: none !important;
+    }
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>User Profile</h1>
+
+<div class="user-info">
+<div><b>Full Name</b>{{ user.full_name }}</div>
+<div><b>Voter ID</b>{{ user.voter_id }}</div>
+<div><b>Gender</b>{{ user.gender }}</div>
+<div><b>Disability</b>{{ user.disability or 'No' }}</div>
+<div><b>Ward</b>{{ user.ward }}</div>
+<div><b>DOB</b>{{ user.dob }}</div>
+<div><b>Mobile</b>{{ user.mobile }}</div>
+<div><b>Email</b>{{ user.email }}</div>
+<div><b>City</b>{{ user.city }}</div>
+<div><b>Pincode</b>{{ user.pincode }}</div>
+<div><b>Address</b>{{ user.address }}</div>
+</div>
+
+<div class="button-row">
+<button onclick="openModal()">View Voter Card</button>
+<a href="{{ url_for('home') }}"><button>Home</button></a>
+<a href="{{ url_for('logout') }}"><button>Logout</button></a>
+</div>
+</div>
+
+<!-- VOTER CARD -->
+<div id="voterModal" class="modal">
+<div class="modal-content">
+
+<div class="modal-header">
+<img src="{{ url_for('static', filename='images/gov_logo2.png') }}">
+VOTER ID CARD
+</div>
+
+<div class="modal-body">
+<div class="card-layout">
+
+<div>
+<p><b>Full Name:</b> {{ user.full_name }}</p>
+<p><b>Voter ID:</b> {{ user.voter_id }}</p>
+<p><b>Gender:</b> {{ user.gender }}</p>
+<p><b>Disability:</b> {{ user.disability or 'No' }}</p>
+<p><b>Ward:</b> {{ user.ward }}</p>
+<p><b>DOB:</b> {{ user.dob }}</p>
+<p><b>Mobile:</b> {{ user.mobile }}</p>
+<p><b>Email:</b> {{ user.email }}</p>
+<p><b>City:</b> {{ user.city }}</p>
+<p><b>Pincode:</b> {{ user.pincode }}</p>
+<p><b>Address:</b> {{ user.address }}</p>
+</div>
+
+<div class="stamp-box">
+<img src="{{ url_for('static', filename='images/voter_id.png') }}">
+<p style="font-size:12px;color:#555;">Govt. Approved</p>
+</div>
+
+</div>
+</div>
+
+<div style="text-align:center; padding-bottom:20px;">
+<button class="close-btn" onclick="closeModal()">Close</button>
+<button class="print-btn" onclick="printCard()">Print Card</button>
+</div>
+
+</div>
+</div>
+
+<script>
+function openModal() {
+    document.getElementById("voterModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("voterModal").style.display = "none";
+}
+
+function printCard() {
+    window.print();
+}
+</script>
+
+</body>
+</html>

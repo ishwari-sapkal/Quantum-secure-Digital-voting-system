@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Voter Statistics Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI';}
+body{background:#f7f7f7;}
+
+header{
+background:linear-gradient(90deg,#0f2a24,#1f4d3f);
+color:white;
+display:flex;justify-content:space-between;padding:15px 50px;
+}
+header h2{color:#bfa76a;}
+
+nav{display:flex;gap:30px;margin-top:12px;}
+nav a{color:#e6f2ec;text-decoration:none;}
+nav a:hover{color:white;}
+
+.container{
+max-width:1200px;
+margin:40px auto;
+padding:25px;
+background:white;
+border-radius:12px;
+border:1px solid #bfa76a;
+}
+
+h2{color:#1f4d3f;margin-bottom:20px;}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+padding:18px;
+border-radius:10px;
+background:white;
+border-left:4px solid #1f4d3f;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+
+.card h3{margin-bottom:10px;}
+
+.stat{font-size:14px;margin:5px 0;}
+.total{color:#1f4d3f;font-weight:600;}
+.male{color:#1f4d3f;}
+.female{color:#bfa76a;}
+.other{color:#6c757d;}
+.disabled{color:#8e44ad;}
+.nondisabled{color:#3498db;}
+
+.chart-box{margin-top:40px;}
+
+.report-header{text-align:center;margin-bottom:30px;}
+.report-header img{height:60px;margin-bottom:10px;}
+.report-header h1{margin-bottom:5px;color:#1f4d3f;}
+.report-header p{color:#555;font-size:14px;}
+
+.instructions{
+background:#f3f7f5;
+padding:15px;
+border-left:4px solid #1f4d3f;
+margin-bottom:25px;
+border-radius:6px;
+color:#1f4d3f;
+}
+
+.generate-btn{
+margin-top:20px;
+padding:12px 25px;
+border:none;
+border-radius:6px;
+background:#1f4d3f;
+color:white;
+cursor:pointer;
+}
+.generate-btn:hover{background:#256d3b;}
+
+@media print {
+header, nav, .generate-btn {display:none !important;}
+body{background:white;}
+.container{margin:0 auto;width:100%;border:none;box-shadow:none;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Election Admin</h2>
+<nav>
+<a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+<a href="{{ url_for('applications') }}">Applications</a>
+<a href="{{ url_for('admin_notice') }}">Notice</a>
+<a href="{{ url_for('admin_result') }}">Results</a>
+<a href="{{ url_for('admin_voters') }}">Voters</a>
+<a href="{{ url_for('home') }}">Logout</a>
+</nav>
+</header>
+
+<div class="container">
+
+<div class="report-header">
+<img src="{{ url_for('static', filename='images/gov_logo.png') }}">
+<h1>Nagarpalika Election 2026</h1>
+<p>Final Voter Report | Generated on: {{ report_time }}</p>
+</div>
+
+<div class="instructions">
+<p><strong>Instructions:</strong> This report contains all voter statistics per party and ward including gender & disability.</p>
+</div>
+
+<h2>Party Summary</h2>
+
+<div class="grid">
+{% for party in parties %}
+<div class="card">
+<h3>{{ party }}</h3>
+<p class="stat total">Total Votes: {{ stats[party].total }}</p>
+<p class="stat male">Male Votes: {{ stats[party].male }}</p>
+<p class="stat female">Female Votes: {{ stats[party].female }}</p>
+<p class="stat other">Other Votes: {{ stats[party].other }}</p>
+<p class="stat disabled">Disabled Votes: {{ stats[party].disabled }}</p>
+<p class="stat nondisabled">Non-Disabled Votes: {{ stats[party].non_disabled }}</p>
+</div>
+{% endfor %}
+</div>
+
+<!-- GENDER CHART -->
+<div class="chart-box">
+<h3>Party Performance (Male / Female / Other)</h3>
+<canvas id="partyChart"></canvas>
+</div>
+
+<!-- WARD CHART -->
+<div class="chart-box">
+<h3>Ward-wise Votes (All Parties)</h3>
+<canvas id="wardChart"></canvas>
+</div>
+
+<!-- ✅ NEW DISABILITY CHART -->
+<div class="chart-box">
+<h3>Disability Distribution (Disabled / Non-Disabled)</h3>
+<canvas id="disabilityChart"></canvas>
+</div>
+
+<button class="generate-btn" onclick="window.print()">Generate Report</button>
+
+</div>
+
+<script>
+
+// ===== GENDER CHART =====
+const partyLabels = {{ parties|tojson }};
+const maleData = [{% for p in parties %}{{ stats[p].male }},{% endfor %}];
+const femaleData = [{% for p in parties %}{{ stats[p].female }},{% endfor %}];
+const otherData = [{% for p in parties %}{{ stats[p].other }},{% endfor %}];
+
+new Chart(document.getElementById("partyChart"), {
+type:'bar',
+data:{
+labels:partyLabels,
+datasets:[
+{label:'Male',data:maleData,backgroundColor:'#1f4d3f'},
+{label:'Female',data:femaleData,backgroundColor:'#bfa76a'},
+{label:'Other',data:otherData,backgroundColor:'#6c757d'}
+]
+},
+options:{
+responsive:true,
+plugins:{legend:{position:'top'}},
+scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}}
+}
+});
+
+
+// ===== WARD CHART =====
+const wardLabels = {{ wards|tojson }};
+const wardDataSets = [
+{% for p in parties %}
+{
+label:'{{ p }}',
+data:[{% for w in wards %}{{ stats[p].wards[w] }},{% endfor %}],
+backgroundColor:'{{ party_colors[p] }}'
+},
+{% endfor %}
+];
+
+new Chart(document.getElementById("wardChart"),{
+type:'bar',
+data:{labels: wardLabels.map(w=>'Ward '+w), datasets: wardDataSets},
+options:{responsive:true,plugins:{legend:{position:'top'}},scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}}}
+});
+
+
+// ===== DISABILITY CHART =====
+const disabledData = [{% for p in parties %}{{ stats[p].disabled }},{% endfor %}];
+const nonDisabledData = [{% for p in parties %}{{ stats[p].non_disabled }},{% endfor %}];
+
+new Chart(document.getElementById("disabilityChart"), {
+type:'bar',
+data:{
+labels:partyLabels,
+datasets:[
+{label:'Disabled',data:disabledData,backgroundColor:'#8e44ad'},
+{label:'Non-Disabled',data:nonDisabledData,backgroundColor:'#3498db'}
+]
+},
+options:{
+responsive:true,
+plugins:{legend:{position:'top'}},
+scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}}
+}
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Election Notice Panel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* 🌿 Reset */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* 🤍 Body */
+body{
+background:#f7f7f7;
+}
+
+/* 🧭 Header */
+header{
+background:linear-gradient(90deg,#0f2a24,#1f4d3f);
+color:white;
+padding:15px 50px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+/* 🟡 Title */
+.header-left{
+margin:16px;
+font-size:22px;
+font-weight:600;
+color:#bfa76a;
+}
+
+/* 🔗 Menu */
+.header-right{
+display:flex;
+gap:20px;
+}
+
+.header-right a{
+color:#e6f2ec;
+text-decoration:none;
+font-size:14px;
+padding:6px 10px;
+border-radius:4px;
+transition:0.3s;
+}
+
+.header-right a:hover{
+background:rgba(255,255,255,0.1);
+color:white;
+}
+
+/* 📢 Marquee */
+.marquee{
+width:100%;
+overflow:hidden;
+background:#ffffff;
+border-bottom:1px solid #bfa76a;
+}
+
+.marquee span{
+display:inline-block;
+padding:10px;
+color:#bfa76a;
+font-weight:500;
+animation:moveText 12s linear infinite;
+}
+
+@keyframes moveText{
+from{transform:translateX(100%)}
+to{transform:translateX(-100%)}
+}
+
+/* 📦 Container */
+.container{
+width:820px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:10px;
+border:1px solid #bfa76a;
+}
+
+/* Labels */
+label{
+display:block;
+margin-top:20px;
+font-weight:500;
+color:#111;
+}
+
+/* Inputs */
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:6px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+/* Upload Box */
+.upload-box{
+margin-top:15px;
+border:1px dashed #bfa76a;
+padding:25px;
+text-align:center;
+border-radius:8px;
+cursor:pointer;
+color:#bfa76a;
+transition:0.3s;
+}
+
+.upload-box:hover{
+background:#faf9f5;
+}
+
+/* Preview */
+.preview{
+margin-top:15px;
+}
+
+.preview img{
+max-width:200px;
+border-radius:6px;
+}
+
+.preview iframe{
+width:100%;
+height:300px;
+border-radius:6px;
+}
+
+/* Button */
+button{
+margin-top:25px;
+width:100%;
+padding:14px;
+border:none;
+background:#1f4d3f;
+color:white;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#2e6b57;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- 🧭 HEADER -->
+<header>
+
+<div class="header-left">
+Election Admin
+</div>
+
+<div class="header-right">
+<a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+<a href="{{ url_for('applications') }}">Applications</a>
+<a href="{{ url_for('admin_notice') }}">Notice</a>
+<a href="{{ url_for('admin_result') }}">Results</a>
+<a href="{{ url_for('admin_voters') }}">Voters</a>
+<a href="{{ url_for('home') }}">Logout</a>
+</div>
+
+</header>
+
+<!-- 📢 Marquee -->
+<div class="marquee">
+<span>Secure Digital Voting • Election Updates • Transparent Elections • Voter Awareness</span>
+</div>
+
+<!-- 📦 Form -->
+<div class="container">
+
+<form action="/upload_notice" method="POST" enctype="multipart/form-data">
+
+<label>Notice Title</label>
+<input type="text" name="title" required>
+
+<label>Description</label>
+<textarea name="description" rows="5" required></textarea>
+
+<label>Upload File / Image</label>
+
+<div class="upload-box" onclick="document.getElementById('fileInput').click()">
+Click Here to Upload Document or Image
+<input type="file" id="fileInput" name="image" accept=".png,.jpg,.jpeg,.pdf" hidden>
+</div>
+
+<div class="preview" id="preview"></div>
+
+<button type="submit">Publish Notice</button>
+
+</form>
+
+</div>
+
+<script>
+
+const fileInput = document.getElementById("fileInput");
+
+fileInput.addEventListener("change", function(){
+
+    const preview = document.getElementById("preview");
+    preview.innerHTML = "";
+
+    const file = this.files[0];
+
+    if(!file) return;
+
+    // 🖼️ IMAGE PREVIEW
+    if(file.type.startsWith("image/")){
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        preview.appendChild(img);
+    }
+
+    // 📄 PDF PREVIEW
+    else if(file.type === "application/pdf"){
+        const iframe = document.createElement("iframe");
+        iframe.src = URL.createObjectURL(file);
+        preview.appendChild(iframe);
+    }
+
+    // 📎 OTHER FILE
+    else{
+        preview.innerHTML = "<p>" + file.name + "</p>";
+    }
+
+
+});
+
+</script>
+
+</body>
+</html>

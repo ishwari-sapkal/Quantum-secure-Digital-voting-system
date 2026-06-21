@@ -1,0 +1,160 @@
+/* 🌿 Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* 🤍 Body */
+body {
+    background: #f7f7f7;
+    color: #111;
+}
+
+/* 🧭 Navbar (Dark Green Gradient) */
+.navbar {
+    background: linear-gradient(90deg, #0f2a24, #1f4d3f);
+    color: white;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 🟡 Election Admin Title */
+.nav-left h2 {
+    margin-top:12px;
+    font-size: 25px;
+    font-weight: 650;
+    color: #bfa76a; /* dusky gold */
+    letter-spacing: 0.6px;
+}
+
+/* Nav Links */
+.nav-right {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-right a {
+    color: #e6f2ec;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.nav-right a:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ffffff;
+}
+
+/* 📦 Container */
+.container {
+    padding: 50px 90px;
+}
+
+/* 🟡 Main Heading */
+h1 {
+    color: #bfa76a;
+    margin-bottom: 35px;
+    font-weight: 600;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 3px;
+    background: #bfa76a;
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+/* ⚫ Section Heading */
+h2 {
+    color: #111;
+    margin-bottom: 20px;
+}
+
+/* 📊 Cards Layout */
+.cards {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* 📦 Card */
+.card {
+    flex: 1;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #bfa76a;
+    text-align: center;
+    transition: 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* Card Text */
+.card h3 {
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111;
+}
+
+/* 📋 Menu Layout */
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+/* 🔘 Menu Cards */
+.menu-card {
+    flex: 1 1 45%;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #111;
+    border: 1px solid #bfa76a;
+    font-weight: 500;
+    transition: 0.25s;
+}
+
+.menu-card:hover {
+    background: #faf9f5;
+    transform: translateY(-3px);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+
+    .container {
+        padding: 30px;
+    }
+
+    .cards {
+        flex-direction: column;
+    }
+
+    .menu {
+        flex-direction: column;
+    }
+
+    .nav-right {
+        display: none;
+    }
+}

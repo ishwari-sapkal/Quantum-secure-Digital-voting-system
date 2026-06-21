@@ -1,0 +1,66 @@
+[
+    {
+        "voter": "ce848d5ddf7ad4360d54f8195cdfd286d3176b2d1c52e788b312e4c055179edc",
+        "candidate": "BJP"
+    },
+    {
+        "voter": "06c30b6a7adbcf0759beabf3a0e1dc80e625ee386834d2177bfdee922894676d",
+        "candidate": "Shiv Sena"
+    },
+    {
+        "voter": "f0199af454d14ee8c84875a08b2acc74dd322fbcf39eabf2de45164cb8c9c0ae",
+        "candidate": "BJP"
+    },
+    {
+        "voter": "955e4d970f7309a846fd0122d01817a9e84c7eadab9408ea4484ccb6d514f021",
+        "candidate": "AAP"
+    },
+    {
+        "voter": "7bc68a1502ff5f6ec49fb6ad4bbb92420a0271942f832590512f8d0eb875f65b",
+        "candidate": "Shiv Sena"
+    },
+    {
+        "voter": "7d15d4c90f4b48284906eaf7407a5f41990590abe8852ea396539b33146aa9a4",
+        "candidate": "AAP"
+    },
+    {
+        "voter": "39fe85f2a415a12180d1d1be7b2859f4c3c010066003a1f97ac0d311fcf8a35e",
+        "candidate": "BJP"
+    },
+    {
+        "voter": "d69bbeea84b8680a83b19f1b8cba148c420073bc10bd3562557d54354dbab35c",
+        "candidate": "BJP"
+    },
+    {
+        "voter": "b3a334cf9030227b4b77c4211b2407013561519dc3dc5befe7d67a1e88bbadcf",
+        "candidate": "BJP"
+    },
+    {
+        "voter": "a1680ea7de7ac413cfc806cb9a52f38f572504189c26207111fe1aa921ecba66",
+        "candidate": "TMC"
+    },
+    {
+        "voter": "45897c0cf1a38c7c2219ce4a8584a92e9ccc8990ecd59adbed970e25075f037d",
+        "candidate": "BSP"
+    },
+    {
+        "voter": "d4faa321c1264c684f8faa5e226684aa7a9a88c57afc7f4feb2540819d173670",
+        "candidate": "NCP"
+    },
+    {
+        "voter": "ebcbd64e74b9352ebca6af4b20f4d785b9f1f6f8f13374d8a2ca892395ceb157",
+        "candidate": "NCP"
+    },
+    {
+        "voter": "84cd84649a29c693fd42ea3634acbcea52ff34bfe049fa5d1a7bccf1e12572d3",
+        "candidate": "BSP"
+    },
+    {
+        "voter": "d8229cbd0a3a6153a538f2a5084910d7505306048c6b2c7e43cb192a39ab2b02",
+        "candidate": "BSP"
+    },
+    {
+        "voter": "42995aeb9e326dcbf33c03dc9cc14b22f9e4d80c68f2f8a16e15149ba0403152",
+        "candidate": "Shiv Sena"
+    }
+]

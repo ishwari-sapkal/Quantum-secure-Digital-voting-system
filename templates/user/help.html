@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help & FAQ</title>
+
+<style>
+/* ---------------- Body & Layout ---------------- */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e3a8a, #ffffff);
+    color: #1e293b;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+}
+
+/* ---------------- Header ---------------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e3a8a;
+    padding: 20px 30px;
+    border-radius: 12px 12px 0 0;
+    color: white;
+}
+
+.header h1 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.header a {
+    color: #fef3c7; /* dusky golden accent */
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.header a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ---------------- FAQ Sections ---------------- */
+.faq-section {
+    margin-top: 20px;
+}
+
+.faq-item {
+    border-bottom: 1px solid #cbd5e1;
+    padding: 15px 0;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: 600;
+    color: #1e3a8a;
+    font-size: 16px;
+}
+
+.faq-answer {
+    display: none;
+    padding-top: 10px;
+    color: #374151;
+    font-size: 15px;
+}
+
+/* ---------------- Buttons ---------------- */
+.btn-back {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #1e3a8a;
+    color: #fff;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background: #2563eb;
+}
+
+/* ---------------- Icons ---------------- */
+.faq-icon {
+    transition: transform 0.3s;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Help & FAQ</h1>
+        <a href="{{ url_for('home') }}">Home</a>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+
+        <div class="faq-item">
+            <div class="faq-question">
+                How do I cast my vote?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Log in with your Voter ID and select your candidate on the voting page. Once submitted, your vote cannot be changed.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                How can I view my voter card?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Go to your profile and click on "View Voter Card". You can print or save it as PDF for your records.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                What if I forget my Voter ID?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Contact the election office or apply for a new voter card using the "Apply for Voter ID" option in your profile.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                How can I check election results?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                After the election, results will be posted in the "Notice" section of your dashboard.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                How do I report issues or errors?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                Use the feedback or complaint section in your profile to report any issues. The admin team will review your submission.
+            </div>
+        </div>
+
+    </div>
+
+    <a href="{{ url_for('home') }}" class="btn-back">Back to Dashboard</a>
+
+</div>
+
+<!-- ---------------- FAQ Script ---------------- -->
+<script>
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach(item => {
+    item.querySelector(".faq-question").addEventListener("click", () => {
+        item.classList.toggle("active");
+        const answer = item.querySelector(".faq-answer");
+        if (answer.style.display === "block") {
+            answer.style.display = "none";
+        } else {
+            answer.style.display = "block";
+        }
+    });
+});
+</script>
+
+</body>
+</html>

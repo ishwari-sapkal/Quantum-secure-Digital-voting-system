@@ -1,0 +1,188 @@
+/* GENERAL STYLES */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #f4f6f8;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background: #1e3a8a;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.6em;
+}
+
+/* NAVIGATION */
+nav {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #60a5fa;
+}
+
+/* DROPDOWN MENU */
+
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    cursor: pointer;
+}
+
+/* dropdown box */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    background: white;
+    min-width: 160px;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border-radius: 6px;
+
+    z-index: 1000;
+}
+
+/* dropdown links */
+.dropdown-content a {
+    color: #1e3a8a;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* hover effect */
+.dropdown-content a:hover {
+    background: #f1f5f9;
+}
+
+/* show dropdown */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* HERO SECTION */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 50px;
+    background: #e0e7ff;
+    flex-wrap: wrap;
+}
+
+.hero-text {
+    max-width: 50%;
+}
+
+.hero-text h2 {
+    font-size: 2.5em;
+    color: #1e3a8a;
+}
+
+.hero-text p {
+    font-size: 1.2em;
+    color: #4b5563;
+    margin-bottom: 30px;
+}
+
+/* HERO BUTTONS */
+.hero-buttons {
+    margin-top: 20px;
+}
+
+.hero-buttons a {
+    display: inline-block;
+    margin-right: 15px;
+    padding: 14px 25px;
+    border-radius: 8px;
+    background: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.hero-buttons a:hover {
+    background: #2563eb;
+    transform: translateY(-3px);
+}
+
+/* HERO IMAGE */
+.hero-image img {
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* FEATURE CARDS */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    width: 260px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.feature-card img {
+    width: 60px;
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    color: #1e3a8a;
+}
+
+.feature-card p {
+    color: #4b5563;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1e3a8a;
+    color: white;
+    margin-top: 30px;
+}

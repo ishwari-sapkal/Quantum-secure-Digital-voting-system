@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Election Report</title>
+
+<style>
+body{
+    font-family:'Segoe UI',sans-serif;
+    color:#111;
+    padding:30px;
+}
+
+/* HEADER */
+.header{
+    text-align:center;
+    border-bottom:2px solid #000;
+    padding-bottom:10px;
+    margin-bottom:20px;
+}
+
+.header h1{
+    font-size:24px;
+    margin-bottom:5px;
+}
+
+.header h2{
+    font-size:18px;
+    color:#444;
+}
+
+/* INFO */
+.info{
+    margin:15px 0;
+    font-size:14px;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th, td{
+    border:1px solid #000;
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background:#f0f0f0;
+}
+
+/* WINNER */
+.winner{
+    background:#dff0d8;
+    font-weight:700;
+}
+
+/* CHART */
+.chart{
+    margin-top:30px;
+    text-align:center;
+}
+
+/* FOOTER */
+.footer{
+    margin-top:50px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.sign{
+    text-align:center;
+    margin-top:40px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>Municipal Corporation</h1>
+    <h2>Nagarpalika Election Result Report</h2>
+</div>
+
+<!-- INFO -->
+<div class="info">
+    <p><strong>Election Year:</strong> 2026</p>
+    <p><strong>Report Generated:</strong> {{ report_time }}</p>
+    <p><strong>Authority:</strong> Election Commission Office</p>
+</div>
+
+<!-- RESULTS TABLE -->
+<table>
+
+<tr>
+    <th>Party</th>
+    <th>Candidate</th>
+    <th>Votes</th>
+    <th>Percentage</th>
+</tr>
+
+{% set all_parties = [
+  {'party':'BJP','candidate':'Narendra Sharma'},
+  {'party':'Congress','candidate':'Rahul Verma'},
+  {'party':'AAP','candidate':'Arvind Mishra'},
+  {'party':'Shiv Sena','candidate':'Uday Patil'},
+  {'party':'BSP','candidate':'Mayank Gautam'},
+  {'party':'CPI','candidate':'Ramesh Kulkarni'},
+  {'party':'NCP','candidate':'Ajay Deshmukh'},
+  {'party':'TMC','candidate':'Sanjay Roy'}
+] %}
+
+{% set total_votes = results.values()|sum %}
+{% if results %}
+    {% set max_votes = results.values()|max %}
+{% else %}
+    {% set max_votes = 0 %}
+{% endif %}
+
+{% for party in all_parties %}
+    {% set votes = results.get(party.party, 0) %}
+
+<tr class="{% if votes == max_votes and total_votes > 0 %}winner{% endif %}">
+    <td>{{ party.party }}</td>
+    <td>{{ party.candidate }}</td>
+    <td>{{ votes }}</td>
+    <td>
+        {% if total_votes > 0 %}
+        {{ ((votes / total_votes) * 100) | round(1) }}%
+        {% else %}
+        0%
+        {% endif %}
+    </td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<!-- WINNER TEXT -->
+{% if total_votes == 0 %}
+<p><strong>No votes have been cast in this election.</strong></p>
+{% elif tie %}
+<p><strong>Result: Tie between candidates.</strong></p>
+{% else %}
+<p><strong>Winner: {{ winner }}</strong></p>
+{% endif %}
+
+<!-- CHART -->
+<div class="chart">
+{% if chart_img %}
+<img src="{{ chart_img }}" style="width:500px;">
+{% endif %}
+</div>
+
+<!-- SIGNATURE -->
+<div class="footer">
+    <div class="sign">
+        ______________________<br>
+        Election Officer
+    </div>
+
+    <div class="sign">
+        ______________________<br>
+        Authorized Signatory
+    </div>
+</div>
+
+</body>
+</html>

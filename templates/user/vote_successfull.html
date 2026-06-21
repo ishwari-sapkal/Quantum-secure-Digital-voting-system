@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vote Successful</title>
+
+<style>
+
+body{
+margin:0;
+font-family:"Segoe UI",sans-serif;
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.container{
+background:#fff;
+padding:40px;
+border-radius:14px;
+text-align:center;
+width:420px;
+box-shadow:0 15px 40px rgba(0,0,0,0.35);
+}
+
+h2{
+color:#16a34a;
+margin-bottom:10px;
+font-size:24px;
+}
+
+p{
+color:#374151;
+font-size:16px;
+}
+
+.candidate{
+color:#1e3a8a;
+font-weight:700;
+}
+
+/* Buttons */
+.btn{
+margin-top:20px;
+display:inline-block;
+padding:10px 22px;
+border-radius:25px;
+text-decoration:none;
+font-weight:600;
+transition:0.3s ease;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Home button gradient */
+.home-btn{
+background: linear-gradient(135deg,#2563eb,#1e40af);
+color:white;
+}
+
+.home-btn:hover{
+background: linear-gradient(135deg,#1d4ed8,#1e3a8a);
+transform: translateY(-2px);
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Logout button gradient */
+.logout-btn{
+background: linear-gradient(135deg,#16a34a,#059669);
+color:white;
+}
+
+.logout-btn:hover{
+background: linear-gradient(135deg,#059669,#047857);
+transform: translateY(-2px);
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* spacing between buttons */
+.btn + .btn {
+margin-left: 12px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>✔ Vote Submitted Successfully</h2>
+
+<p>Thank you <b>{{ user }}</b></p>
+
+<p>
+Your vote for
+<span class="candidate">{{ candidate }}</span>
+has been securely recorded.
+</p>
+
+<p>
+Your vote cannot be modified and is safely stored.
+</p>
+
+<!-- Enhanced Home and Logout buttons -->
+<a href="{{ url_for('home') }}" class="btn home-btn">Home</a>
+<a href="{{ url_for('logout') }}" class="btn logout-btn">Logout</a>
+
+</div>
+
+</body>
+</html>

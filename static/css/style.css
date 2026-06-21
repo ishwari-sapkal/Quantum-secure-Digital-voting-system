@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.vote-bg {
+    background: linear-gradient(135deg, #ff9933, #ffffff, #138808);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vote-card {
+    background: white;
+    width: 520px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.vote-card h2 {
+    text-align: center;
+    color: #1f2937;
+}
+
+.vote-card p {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.party {
+    display: block;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #e5e7eb;
+}
+
+.party input {
+    margin-right: 10px;
+}
+
+.bjp { background: #fff7ed; }
+.inc { background: #eef2ff; }
+.aap { background: #ecfeff; }
+.cpi { background: #fef2f2; }
+
+.vote-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: #2563eb;
+    color: white;
+    font-size: 1.1em;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.vote-btn:hover {
+    background: #1e40af;
+}
+
+.nav-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: bold;
+}

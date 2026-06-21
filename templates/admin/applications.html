@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Applications</title>
+
+<style>
+
+/* 🌿 Reset */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+/* 🤍 Body */
+body{
+background:#f7f7f7;
+}
+
+/* 🧭 Header (Same as Dashboard) */
+header{
+background:linear-gradient(90deg,#0f2a24,#1f4d3f);
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 50px;
+}
+
+/* 🟡 Title */
+header h2{
+color:#bfa76a;
+font-size:22px;
+margin:16px;
+font-weight:600;
+}
+
+/* 🔗 Menu */
+nav{
+display:flex;
+gap:20px;
+}
+
+nav a{
+color:#e6f2ec;
+text-decoration:none;
+font-size:14px;
+padding:6px 10px;
+border-radius:4px;
+transition:0.3s;
+}
+
+nav a:hover{
+background:rgba(255,255,255,0.1);
+color:white;
+}
+
+/* 📦 Container */
+.container{
+max-width:1100px;
+margin:50px auto;
+background:#ffffff;
+padding:30px;
+border-radius:12px;
+border:1px solid #bfa76a;
+}
+
+/* 🟡 Heading */
+.container h2{
+color:#bfa76a;
+margin-bottom:20px;
+}
+
+/* 📊 Table */
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+}
+
+/* Table Header */
+th{
+background:#f3f4f3;
+color:#111;
+padding:12px;
+}
+
+/* Table Data */
+td{
+padding:12px;
+border-bottom:1px solid #e0e0e0;
+text-align:center;
+}
+
+/* Row Hover */
+tr:hover{
+background:#faf9f5;
+}
+
+/* 🔘 Button */
+.btn{
+background:#1f4d3f;
+color:white;
+padding:8px 16px;
+border-radius:6px;
+text-decoration:none;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#2e6b57;
+}
+
+/* 📌 Status Colors */
+.status-approved{
+color:green;
+font-weight:600;
+}
+
+.status-pending{
+color:#d4a017;
+font-weight:500;
+}
+
+.status-rejected{
+color:red;
+font-weight:600;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h2>Election Admin</h2>
+
+<nav>
+
+<a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+<a href="{{ url_for('applications') }}">Applications</a>
+<a href="{{ url_for('admin_notice') }}">Notice</a>
+<a href="{{ url_for('admin_result') }}">Results</a>
+<a href="{{ url_for('admin_voters') }}">Voters</a>
+<a href="{{ url_for('home') }}">Logout</a>
+
+</nav>
+
+</header>
+
+
+<div class="container">
+
+<h2>Applications List</h2>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<p style="color:green">{{messages[0]}}</p>
+{% endif %}
+{% endwith %}
+
+
+<table>
+
+<tr>
+<th>Name</th>
+<th>Mobile</th>
+<th>City</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for app in applications %}
+
+<tr>
+
+<td>{{app.full_name}}</td>
+<td>{{app.mobile}}</td>
+<td>{{app.city}}</td>
+
+<td class="status-{{app.status | lower}}">
+{{app.status}}
+</td>
+
+<td>
+<a href="{{ url_for('full_application', id=app._id) }}" class="btn">
+View Application
+</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

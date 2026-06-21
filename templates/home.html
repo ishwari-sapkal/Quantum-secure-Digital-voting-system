@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantum Secure Digital Voting System</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+<!-- New Navbar CSS -->
+<style>
+    /* Navbar */
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    nav.navbar {
+        background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 30px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        color: #fff;
+    }
+
+    nav.navbar a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 6px;
+
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    nav.navbar a:hover {
+        color: #ffda79;
+    }
+
+    nav.navbar .nav-left h1 {
+        margin: 14px;
+        font-size: 1.5em;
+    }
+
+    nav.navbar .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Dropdown */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropbtn {
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #203a43;
+        min-width: 150px;
+        box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 8px;
+    }
+
+    .dropdown-content a {
+        color: #fff;
+        padding: 10px 15px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #0f2027;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-left">
+        <h1>Quantum Voting System</h1>
+    </div>
+    <div class="nav-right">
+        <a href="{{ url_for('home') }}">Home</a>
+
+        {% if user %}
+            <a href="{{ url_for('vote') }}">Vote</a>
+            <a href="{{ url_for('notice') }}">notice</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('help') }}">Help</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+
+
+        {% else %}
+            <a href="{{ url_for('apply_card') }}">Apply for Voter ID</a>
+            <a href="{{ url_for('application_status') }}">Application Status</a>
+
+            <div class="dropdown">
+                <span class="dropbtn">Login</span>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('login') }}">User Login</a>
+                    <a href="{{ url_for('admin_login') }}">Admin Login</a>
+                </div>
+
+        <a href="{{ url_for('notice') }}">notice</a>
+        <a href="{{ url_for('help') }}">Help</a>
+            </div>
+        {% endif %}
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-text">
+        <h2>Secure & Transparent Voting</h2>
+        <p>
+            Participate in elections safely and view results instantly.
+            Our Quantum Secure Voting System ensures integrity, transparency,
+            and tamper-proof elections.
+        </p>
+
+        <div class="hero-buttons">
+            {% if session.get("user") %}
+                <a href="{{ url_for('vote') }}">Vote Now</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('apply_card') }}">Apply for Voter ID</a>
+                <a href="{{ url_for('application_status') }}">Application Status</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="{{ url_for('static', filename='images/vote.jpg') }}" alt="Voting">
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="features">
+    <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+        <h3>Secure Voting</h3>
+        <p>Quantum encryption ensures every vote is protected and confidential.</p>
+    </div>
+
+    <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1256/1256650.png">
+        <h3>Transparent Results</h3>
+        <p>Blockchain based verification allows transparent result calculation.</p>
+    </div>
+
+    <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2910/2910766.png">
+        <h3>User Friendly</h3>
+        <p>Simple interface allowing voters and admins to easily use the system.</p>
+    </div>
+</section>
+
+<footer>
+    © 2026 Quantum Secure Digital Voting System
+</footer>
+
+</body>
+</html>

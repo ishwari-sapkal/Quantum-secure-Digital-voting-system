@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Voter Login</title>
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
+
+/* BACKGROUND */
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0f172a,#1e3a8a,#0f172a);
+}
+
+/* CARD */
+.card{
+width:520px;
+background:#ffffff;
+border-radius:16px;
+padding:35px;
+box-shadow:0 20px 50px rgba(0,0,0,0.4);
+}
+
+/* HEADER */
+.header{
+text-align:center;
+font-size:24px;
+font-weight:600;
+margin-bottom:25px;
+color:#d4af37;
+}
+
+/* INPUT GROUP */
+.input-group{
+margin-bottom:18px;
+}
+
+label{
+display:block;
+margin-bottom:6px;
+font-weight:600;
+color:#1e293b;
+}
+
+/* INPUTS */
+input,select{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:1px solid #cbd5e1;
+background:#f8fafc;
+font-size:14px;
+}
+
+/* ERROR MESSAGE */
+.error{
+color:red;
+font-size:13px;
+margin-top:5px;
+display:none;
+}
+
+/* FOCUS */
+input:focus,select:focus{
+outline:none;
+border-color:#2563eb;
+box-shadow:0 0 6px rgba(37,99,235,0.3);
+}
+
+/* GENDER */
+.gender-group{
+display:flex;
+gap:25px;
+margin-top:5px;
+color:#374151;
+}
+
+/* BUTTON */
+button{
+margin-top:20px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:30px;
+background:linear-gradient(90deg,#1e3a8a,#2563eb);
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="header">Voter Login</div>
+
+<form method="POST" onsubmit="return validateName()">
+
+<!-- NAME FIELD -->
+<div class="input-group">
+<label>Select Name</label>
+
+<input list="usersList" id="nameInput" name="full_name"
+placeholder="Type to search name" required>
+
+<datalist id="usersList">
+{% for user in users %}
+<option value="{{user.full_name}}">
+{% endfor %}
+</datalist>
+
+<div class="error" id="nameError">Please select a valid user from the list</div>
+
+</div>
+
+<div class="input-group">
+<label>Voter ID</label>
+<input type="text" name="voter_id" required>
+</div>
+
+<div class="input-group">
+<label>Gender</label>
+<div class="gender-group">
+<label><input type="radio" name="gender" value="Male" required> Male</label>
+<label><input type="radio" name="gender" value="Female"> Female</label>
+<label><input type="radio" name="gender" value="Other"> Other</label>
+</div>
+</div>
+
+<div class="input-group">
+<label>Ward Number</label>
+<select name="ward" required>
+<option value="">Select Ward</option>
+
+{% for i in range(1,11) %}
+<option value="{{ i }}">Ward {{ i }}</option>
+{% endfor %}
+
+</select>
+</div>
+
+<button type="submit">Login</button>
+
+</form>
+
+</div>
+
+<!-- ✅ VALIDATION SCRIPT -->
+<script>
+function validateName() {
+    const input = document.getElementById("nameInput").value;
+    const options = document.getElementById("usersList").options;
+    let valid = false;
+
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].value === input) {
+            valid = true;
+            break;
+        }
+    }
+
+    const error = document.getElementById("nameError");
+
+    if (!valid) {
+        error.style.display = "block";
+        return false;
+    } else {
+        error.style.display = "none";
+        return true;
+    }
+}
+</script>
+
+</body>
+</html>

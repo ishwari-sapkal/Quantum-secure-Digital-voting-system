@@ -1,0 +1,138 @@
+[
+    {
+        "index": 1,
+        "time": "2026-02-09 12:13:05.047852",
+        "voter_hash": "ce848d5ddf7ad4360d54f8195cdfd286d3176b2d1c52e788b312e4c055179edc",
+        "candidate": "BJP",
+        "previous_hash": "0",
+        "hash": "220046640dfe7e5a53b50b45299c9f1419cb35b5e69a3a5540626df2a1ef96fd"
+    },
+    {
+        "index": 2,
+        "time": "2026-02-09 12:39:51.175017",
+        "voter_hash": "06c30b6a7adbcf0759beabf3a0e1dc80e625ee386834d2177bfdee922894676d",
+        "candidate": "Shiv Sena",
+        "previous_hash": "220046640dfe7e5a53b50b45299c9f1419cb35b5e69a3a5540626df2a1ef96fd",
+        "hash": "c126d345327c881e018339470e5d6f313d28f02e3bbba4e7aee0bc104adf5429"
+    },
+    {
+        "index": 3,
+        "time": "2026-02-09 12:53:27.095032",
+        "voter_hash": "f0199af454d14ee8c84875a08b2acc74dd322fbcf39eabf2de45164cb8c9c0ae",
+        "candidate": "BJP",
+        "previous_hash": "c126d345327c881e018339470e5d6f313d28f02e3bbba4e7aee0bc104adf5429",
+        "hash": "e2c65766e15e347fb5666d762757154912f17d82c451c5ae1e22b7c46381f080"
+    },
+    {
+        "index": 4,
+        "time": "2026-02-09 13:00:58.846279",
+        "voter_hash": "955e4d970f7309a846fd0122d01817a9e84c7eadab9408ea4484ccb6d514f021",
+        "candidate": "AAP",
+        "previous_hash": "e2c65766e15e347fb5666d762757154912f17d82c451c5ae1e22b7c46381f080",
+        "hash": "1387028b5db01b316d4c38411b07f3473bf0d53b2dd18a8806eb327be13b8806"
+    },
+    {
+        "index": 5,
+        "time": "2026-02-10 17:28:21.422115",
+        "voter_hash": "7bc68a1502ff5f6ec49fb6ad4bbb92420a0271942f832590512f8d0eb875f65b",
+        "candidate": "Shiv Sena",
+        "previous_hash": "1387028b5db01b316d4c38411b07f3473bf0d53b2dd18a8806eb327be13b8806",
+        "hash": "00e7e3e6a81de53fc68f1168573575ea4d22065f1a6193273454dc53349e412c"
+    },
+    {
+        "index": 6,
+        "time": "2026-02-16 22:14:51.689038",
+        "voter_hash": "7d15d4c90f4b48284906eaf7407a5f41990590abe8852ea396539b33146aa9a4",
+        "candidate": "AAP",
+        "previous_hash": "00e7e3e6a81de53fc68f1168573575ea4d22065f1a6193273454dc53349e412c",
+        "hash": "dda3d4b23a410f07af3245002ac2ddc04515afdc2901255241a45e2bd9b21757"
+    },
+    {
+        "index": 7,
+        "time": "2026-02-17 13:14:56.694967",
+        "voter_hash": "39fe85f2a415a12180d1d1be7b2859f4c3c010066003a1f97ac0d311fcf8a35e",
+        "candidate": "BJP",
+        "previous_hash": "dda3d4b23a410f07af3245002ac2ddc04515afdc2901255241a45e2bd9b21757",
+        "hash": "5e44e6391326a288623118ab8d0e2e21f5f7968b7cad9ea3ec2136a5356e6d8c"
+    },
+    {
+        "index": 8,
+        "time": "2026-02-23 20:46:25.726938",
+        "voter_hash": "d69bbeea84b8680a83b19f1b8cba148c420073bc10bd3562557d54354dbab35c",
+        "candidate": "BJP",
+        "previous_hash": "5e44e6391326a288623118ab8d0e2e21f5f7968b7cad9ea3ec2136a5356e6d8c",
+        "hash": "31574b82f46e32c34a71207d30381ee98ac46450fafcba3f45aaaeb98633db79"
+    },
+    {
+        "index": 9,
+        "time": "2026-02-23 21:26:41.364975",
+        "voter_hash": "b3a334cf9030227b4b77c4211b2407013561519dc3dc5befe7d67a1e88bbadcf",
+        "candidate": "BJP",
+        "previous_hash": "31574b82f46e32c34a71207d30381ee98ac46450fafcba3f45aaaeb98633db79",
+        "hash": "6f4b9f8b82b32dddbe8d99d4ceedaea75a1de5fab8e1c1540b97e9a0b655e595"
+    },
+    {
+        "index": 10,
+        "time": "2026-02-24 15:43:13.554521",
+        "voter_hash": "a1680ea7de7ac413cfc806cb9a52f38f572504189c26207111fe1aa921ecba66",
+        "candidate": "TMC",
+        "previous_hash": "6f4b9f8b82b32dddbe8d99d4ceedaea75a1de5fab8e1c1540b97e9a0b655e595",
+        "hash": "1f5fa0d8f2356f9d8676db65127131af6b64841cb23ff7aa2c7443e105d51ea6"
+    },
+    {
+        "index": 11,
+        "time": "2026-02-24 15:51:36.584936",
+        "voter_hash": "45897c0cf1a38c7c2219ce4a8584a92e9ccc8990ecd59adbed970e25075f037d",
+        "candidate": "BSP",
+        "previous_hash": "1f5fa0d8f2356f9d8676db65127131af6b64841cb23ff7aa2c7443e105d51ea6",
+        "hash": "a3820aebcec54586f9d17b73e947fd23be6a02909006c9732b375804245e7e9e"
+    },
+    {
+        "index": 12,
+        "time": "2026-02-24 15:53:59.975858",
+        "voter_hash": "d4faa321c1264c684f8faa5e226684aa7a9a88c57afc7f4feb2540819d173670",
+        "candidate": "NCP",
+        "previous_hash": "a3820aebcec54586f9d17b73e947fd23be6a02909006c9732b375804245e7e9e",
+        "hash": "0c56b786253c1ad732d4e7d3146fea7167e382ed941656d21f5491cd99bad71d"
+    },
+    {
+        "index": 13,
+        "time": "2026-02-24 15:56:51.598859",
+        "voter_hash": "ebcbd64e74b9352ebca6af4b20f4d785b9f1f6f8f13374d8a2ca892395ceb157",
+        "candidate": "NCP",
+        "previous_hash": "0c56b786253c1ad732d4e7d3146fea7167e382ed941656d21f5491cd99bad71d",
+        "hash": "c974d4ce1ee9c9cc30cefee6302aa2c1140238cc18bbea426c9dcaf63b482187"
+    },
+    {
+        "index": 14,
+        "time": "2026-02-25 21:21:59.068835",
+        "voter_hash": "84cd84649a29c693fd42ea3634acbcea52ff34bfe049fa5d1a7bccf1e12572d3",
+        "candidate": "BSP",
+        "previous_hash": "c974d4ce1ee9c9cc30cefee6302aa2c1140238cc18bbea426c9dcaf63b482187",
+        "hash": "73d42ad0265875eeba24547f756a4ebccf5618681790e9665e769d253fa44dad"
+    },
+    {
+        "index": 15,
+        "time": "2026-03-05 11:30:36.389466",
+        "voter_hash": "d8229cbd0a3a6153a538f2a5084910d7505306048c6b2c7e43cb192a39ab2b02",
+        "candidate": "BSP",
+        "previous_hash": "73d42ad0265875eeba24547f756a4ebccf5618681790e9665e769d253fa44dad",
+        "hash": "5904e6c35d75ba93db1227c4e1cec35ecb4ce2bd38ed2106a38425c6e821ddff"
+    },
+    {
+        "index": 16,
+        "time": "2026-03-05 14:30:43.022428",
+        "voter_hash": "b8dbe96d974c91f3114806ea0f2c3f2aaaeac8a79c19600c64c9efa41ef421e9",
+        "candidate": "TMC",
+        "previous_hash": "5904e6c35d75ba93db1227c4e1cec35ecb4ce2bd38ed2106a38425c6e821ddff",
+        "hash": "b4f44122421fcb9a7adc9216a6714d328a4feadebb6dc6939ee8303b7ed85107"
+    },
+    {
+        "index": 17,
+        "time": "2026-03-05 14:36:47.739408",
+        "voter_hash": "42995aeb9e326dcbf33c03dc9cc14b22f9e4d80c68f2f8a16e15149ba0403152",
+        "candidate": "Shiv Sena",
+        "previous_hash": "b4f44122421fcb9a7adc9216a6714d328a4feadebb6dc6939ee8303b7ed85107",
+        "hash": "2f21800283aa6e55eed9c3ae055c726b8b6ddf1b914ed78f6f713349dbf8e754"
+    }
+]

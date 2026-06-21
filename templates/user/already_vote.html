@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Already Voted</title>
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #2c3e50, #4a6fa5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #f9f9f9;
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    max-width: 500px;
+}
+
+.container h2 {
+    color: #1e3a8a;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.container p {
+    font-size: 18px;
+    color: #374151;
+    margin-bottom: 25px;
+}
+
+.container a {
+    display: inline-block;
+    text-decoration: none;
+    background: #2563eb;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.container a:hover {
+    background: #1d4ed8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Vote Already Submitted</h2>
+    <p>Hi <b>{{ user }}</b>, our records show that you have already cast your vote.</p>
+    <a href="{{ url_for('home') }}">Go to Home</a>
+</div>
+
+</body>
+</html>

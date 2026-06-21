@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Application Details</title>
+
+<style>
+
+/* 🌿 Reset */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+/* 🤍 Body */
+body{
+background:#f7f7f7;
+}
+
+/* 🧭 Header */
+header{
+background:linear-gradient(90deg,#0f2a24,#1f4d3f);
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 50px;
+}
+
+/* 🟡 Title */
+header h2{
+color:#bfa76a;
+margin:16px;
+font-size:22px;
+font-weight:600;
+}
+
+/* 🔗 Menu */
+nav{
+display:flex;
+gap:20px;
+}
+
+nav a{
+color:#e6f2ec;
+text-decoration:none;
+font-size:14px;
+padding:6px 10px;
+border-radius:4px;
+transition:0.3s;
+}
+
+nav a:hover{
+background:rgba(255,255,255,0.1);
+color:white;
+}
+
+/* 📦 Container */
+.container{
+max-width:900px;
+margin:50px auto;
+background:#ffffff;
+padding:30px;
+border-radius:12px;
+border:1px solid #bfa76a;
+}
+
+/* 🟡 Heading */
+.container h2{
+color:#bfa76a;
+margin-bottom:20px;
+}
+
+/* 📊 Grid */
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+/* 📦 Info Box */
+.box{
+background:#ffffff;
+padding:12px;
+border-radius:8px;
+border:1px solid #e0e0e0;
+}
+
+/* 📄 ID Section */
+h3{
+margin-top:25px;
+margin-bottom:10px;
+color:#111;
+}
+
+/* 🔗 Link */
+a{
+color:#1f4d3f;
+text-decoration:none;
+font-weight:500;
+}
+
+a:hover{
+text-decoration:underline;
+}
+
+/* 🔘 Buttons Section */
+.buttons{
+text-align:center;
+margin-top:30px;
+}
+
+/* Input */
+input{
+padding:10px;
+width:250px;
+border-radius:6px;
+border:1px solid #ccc;
+margin-bottom:10px;
+}
+
+/* Buttons */
+.btn{
+padding:10px 20px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+margin:10px;
+transition:0.3s;
+}
+
+/* Approve */
+.approve{
+background:#1f4d3f;
+color:white;
+}
+
+.approve:hover{
+background:#2e6b57;
+}
+
+/* Reject */
+.reject{
+background:#a83232;
+color:white;
+}
+
+.reject:hover{
+background:#c44141;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h2>Election Admin</h2>
+
+<nav>
+
+<a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+<a href="{{ url_for('applications') }}">Applications</a>
+<a href="{{ url_for('admin_notice') }}">Notice</a>
+<a href="{{ url_for('admin_result') }}">Results</a>
+<a href="{{ url_for('admin_voters') }}">Voters</a>
+<a href="{{ url_for('home') }}">Logout</a>
+
+</nav>
+
+</header>
+
+<div class="container">
+
+<h2>{{application.full_name}}</h2>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<p style="color:red">{{messages[0]}}</p>
+{% endif %}
+{% endwith %}
+
+<div class="grid">
+
+<div class="box"><b>User Hash:</b> {{application.user_hash}}</div>
+<div class="box"><b>DOB:</b> {{application.dob}}</div>
+<div class="box"><b>Gender:</b> {{application.gender}}</div>
+
+<!-- ✅ DISABILITY FIELD ADDED -->
+<div class="box">
+<b>Disability:</b>
+<span style="color: {{ 'green' if application.disability=='Yes' else 'red' }}">
+{{ application.disability or 'No' }}
+</span>
+</div>
+
+<div class="box"><b>Mobile:</b> {{application.mobile}}</div>
+<div class="box"><b>Email:</b> {{application.email}}</div>
+<div class="box"><b>Address:</b> {{application.address}}</div>
+<div class="box"><b>City:</b> {{application.city}}</div>
+<div class="box"><b>Pincode:</b> {{application.pincode}}</div>
+<div class="box"><b>Ward:</b> {{application.ward}}</div>
+<div class="box"><b>Status:</b> {{application.status}}</div>
+<div class="box"><b>Created:</b> {{application.created_at}}</div>
+
+</div>
+
+<h3>ID Proof</h3>
+
+<a href="{{ url_for('static', filename='uploads/' + application.id_proof) }}" target="_blank">
+View Document
+</a>
+
+<div class="buttons">
+
+<form action="{{ url_for('approve_application', id=application._id) }}" method="POST">
+
+<input type="text" name="voter_id" placeholder="Enter Voter ID (ex: VOTE1001)" required>
+
+<br>
+
+<button class="btn approve">Approve</button>
+
+</form>
+
+<form action="{{ url_for('reject_application', id=application._id) }}" method="POST">
+
+<button class="btn reject">Reject</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+</html>

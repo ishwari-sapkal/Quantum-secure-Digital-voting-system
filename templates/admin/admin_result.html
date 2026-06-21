@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Election Results</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+/* BODY */
+body{
+background:#f7f7f7;
+color:#111;
+}
+
+/* NAVBAR (YOUR DESIGN) */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:linear-gradient(90deg,#0f2a24,#1f4d3f);
+color:white;
+}
+
+.navbar h2{
+color:#bfa76a;
+}
+
+.nav-right a{
+margin-left:20px;
+text-decoration:none;
+color:#e6f2ec;
+font-size:14px;
+}
+
+.nav-right a:hover{
+color:white;
+}
+
+/* CONTAINER */
+.container{
+max-width:1100px;
+margin:40px auto;
+padding:30px;
+background:white;
+border-radius:12px;
+border:1px solid #bfa76a;
+position:relative;
+}
+
+/* WATERMARK */
+.container::before{
+content:"GOVERNMENT AUTHORIZED";
+position:absolute;
+top:40%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:90px;
+color:rgba(0,0,0,0.05);
+pointer-events:none;
+}
+
+/* HEADER */
+.report-header{
+text-align:center;
+margin-bottom:20px;
+border-bottom:1px solid #ddd;
+padding-bottom:10px;
+}
+
+.report-header h1{
+font-size:24px;
+color:#1f4d3f;
+}
+
+.report-header p{
+font-size:13px;
+color:#555;
+}
+
+/* LOGO */
+.logo-top{
+text-align:center;
+margin-bottom:10px;
+}
+
+.logo-top img{
+width:40px;
+opacity:0.9;
+}
+
+/* BUTTON */
+.btn{
+margin:15px 5px;
+padding:10px 20px;
+border:none;
+border-radius:6px;
+background:#1f4d3f;
+color:white;
+cursor:pointer;
+}
+
+/* CARDS */
+.logo-column{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.logo-row{
+border:1px solid #e0e0e0;
+padding:15px;
+border-radius:10px;
+display:flex;
+gap:10px;
+align-items:center;
+transition:0.3s;
+}
+
+.logo-row:hover{
+transform:translateY(-3px);
+}
+
+.logo-row img{
+width:60px;
+}
+
+.party-name{
+font-weight:700;
+}
+
+.vote-count{
+color:#1f4d3f;
+font-weight:600;
+}
+
+.winner{
+border:2px solid #1f4d3f;
+background:#f3f7f5;
+}
+
+/* CHART */
+.chart-box{
+margin-top:30px;
+}
+
+/* PRINT STYLE */
+@media print {
+
+.navbar,.btn{
+display:none;
+}
+
+.container{
+border:none;
+}
+
+/* watermark stronger in print */
+.container::before{
+font-size:100px;
+color:rgba(0,0,0,0.08);
+}
+
+/* official header */
+.report-header::before{
+content:"Municipal Corporation\nNagarpalika Election Result Report";
+white-space:pre;
+display:block;
+font-weight:700;
+font-size:20px;
+margin-bottom:10px;
+}
+
+/* signature */
+.container::after{
+content:"\A\A Digitaly Approved by Chief Election Administrator\A Election Officer  ";
+white-space:pre;
+display:block;
+margin-top:40px;
+}
+
+
+}
+.header-flex{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:15px;
+}
+
+.gov-logo{
+width:65px;
+height:auto;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-left">
+        <h2>Election Admin</h2>
+    </div>
+    <div class="nav-right">
+        <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('applications') }}">Applications</a>
+        <a href="{{ url_for('admin_notice') }}">Notice Board</a>
+        <a href="{{ url_for('admin_result') }}">Results</a>
+        <a href="{{ url_for('admin_voters') }}">Voters</a>
+        <a href="{{ url_for('home') }}">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+
+<div class="report-header">
+
+    <div class="header-flex">
+        <img src="{{ url_for('static', filename='images/gov_logo.png') }}" class="gov-logo">
+
+        <div>
+            <h1>Nagarpalika Election 2026</h1>
+            <p>Final Voting Report | Generated on: {{ report_time }}</p>
+        </div>
+    </div>
+
+</div>
+
+<button class="btn" onclick="window.print()">📄 Generate Report</button>
+
+{% set all_parties = [
+  {'party':'BJP','candidate':'Narendra Sharma','logo':'bjp.png'},
+  {'party':'Congress','candidate':'Rahul Verma','logo':'congress.png'},
+  {'party':'AAP','candidate':'Arvind Mishra','logo':'aap.png'},
+  {'party':'Shiv Sena','candidate':'Uday Patil','logo':'shivsena.png'},
+  {'party':'BSP','candidate':'Mayank Gautam','logo':'bsp.png'},
+  {'party':'CPI','candidate':'Ramesh Kulkarni','logo':'cpi.png'},
+  {'party':'NCP','candidate':'Ajay Deshmukh','logo':'ncp.png'},
+  {'party':'TMC','candidate':'Sanjay Roy','logo':'tmc.png'}
+] %}
+
+{% set total_votes = results.values()|sum %}
+{% if results %}
+{% set max_votes = results.values()|max %}
+{% else %}
+{% set max_votes = 0 %}
+{% endif %}
+
+<div class="logo-column">
+
+{% for party in all_parties %}
+{% set votes = results.get(party.party, 0) %}
+
+<div class="logo-row {% if votes == max_votes and total_votes > 0 %}winner{% endif %}">
+<img src="{{ url_for('static', filename='images/' ~ party.logo) }}">
+
+<div>
+<div class="party-name">{{ party.party }}</div>
+<div>{{ party.candidate }}</div>
+<div class="vote-count">Votes: {{ votes }}</div>
+
+<div>
+{% if total_votes > 0 %}
+{{ ((votes / total_votes) * 100) | round(1) }}%
+{% else %}
+0%
+{% endif %}
+</div>
+
+{% if votes == max_votes and total_votes > 0 %}
+<div>🏆 Winner</div>
+{% endif %}
+
+</div>
+</div>
+
+{% endfor %}
+
+</div>
+
+<!-- CHART -->
+{% if total_votes > 0 %}
+<div class="chart-box">
+<canvas id="chart"></canvas>
+</div>
+{% endif %}
+
+</div>
+
+<script>
+
+{% if total_votes > 0 %}
+
+const ctx = document.getElementById('chart').getContext('2d');
+
+const labels = [{% for p in all_parties %}'{{ p.party }}',{% endfor %}];
+const data = [{% for p in all_parties %}{{ results.get(p.party,0) }},{% endfor %}];
+
+new Chart(ctx,{
+type:'bar',
+data:{
+labels:labels,
+datasets:[{
+data:data,
+backgroundColor:'#1f4d3f',
+borderRadius:6
+}]
+},
+options:{
+plugins:{legend:{display:false}},
+scales:{
+y:{beginAtZero:true}
+}
+},
+plugins:[{
+id:'labels',
+afterDatasetsDraw(chart){
+const {ctx}=chart;
+chart.data.datasets.forEach(ds=>{
+chart.getDatasetMeta(0).data.forEach((bar,index)=>{
+const value = ds.data[index];
+ctx.fillStyle='#000';
+ctx.font='bold 12px Segoe UI';
+ctx.textAlign='center';
+ctx.fillText(value, bar.x, bar.y - 5); // ✅ numbers on top
+});
+});
+}
+}]
+});
+
+{% endif %}
+
+</script>
+
+</body>
+</html>
